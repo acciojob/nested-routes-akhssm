@@ -3,9 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Link,
-  useRouteMatch,
-  useParams
+  Link
 } from "react-router-dom";
 import "../styles/App.css";
 
@@ -13,39 +11,32 @@ const Home = () => {
   return <div>Index</div>;
 };
 
-const Women = () => {
-  const { path, url } = useRouteMatch();
-
+const Women = ({ match }) => {
   return (
     <div>
       <p>Women Items:</p>
       <ul>
         <li>
-          <Link to={`${url}/grooming`}>Grooming</Link>
+          <Link to={`${match.url}/grooming`}>Grooming</Link>
         </li>
         <li>
-          <Link to={`${url}/shirt`}>Shirt</Link>
+          <Link to={`${match.url}/shirt`}>Shirt</Link>
         </li>
         <li>
-          <Link to={`${url}/trouser`}>Trouser</Link>
+          <Link to={`${match.url}/trouser`}>Trouser</Link>
         </li>
         <li>
-          <Link to={`${url}/jewellery`}>Jewellery</Link>
+          <Link to={`${match.url}/jewellery`}>Jewellery</Link>
         </li>
       </ul>
 
-      <Switch>
-        <Route path={`${path}/:item`}>
-          <Item />
-        </Route>
-      </Switch>
+      <Route path={`${match.path}/:item`} component={Item} />
     </div>
   );
 };
 
-const Item = () => {
-  const { item } = useParams();
-  return <div>{item}</div>;
+const Item = ({ match }) => {
+  return <div>{match.params.item}</div>;
 };
 
 function App() {
@@ -62,13 +53,8 @@ function App() {
         </ul>
 
         <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-
-          <Route path="/women">
-            <Women />
-          </Route>
+          <Route exact path="/" component={Home} />
+          <Route path="/women" component={Women} />
         </Switch>
       </div>
     </Router>
