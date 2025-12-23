@@ -11,22 +11,26 @@ const Home = () => {
   return <div>Index</div>;
 };
 
+const Item = ({ match }) => {
+  return <div>{match.params.item}</div>;
+};
+
 const Women = ({ match }) => {
   return (
     <div>
       <p>Women Items:</p>
       <ul>
         <li>
-          <Link to={`${match.url}/grooming`}>Grooming</Link>
+          <Link to={`${match.url}/Grooming`}>Grooming</Link>
         </li>
         <li>
-          <Link to={`${match.url}/shirt`}>Shirt</Link>
+          <Link to={`${match.url}/Shirt`}>Shirt</Link>
         </li>
         <li>
-          <Link to={`${match.url}/trouser`}>Trouser</Link>
+          <Link to={`${match.url}/Trouser`}>Trouser</Link>
         </li>
         <li>
-          <Link to={`${match.url}/jewellery`}>Jewellery</Link>
+          <Link to={`${match.url}/Jewellery`}>Jewellery</Link>
         </li>
       </ul>
 
@@ -35,28 +39,28 @@ const Women = ({ match }) => {
   );
 };
 
-const Item = ({ match }) => {
-  return <div>{match.params.item}</div>;
-};
-
 function App() {
   return (
     <Router>
-      <div className="main-container">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/women">Women</Link>
-          </li>
-        </ul>
+      <main>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/women">Women</Link>
+              </li>
+            </ul>
+          </nav>
 
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/women" component={Women} />
-        </Switch>
-      </div>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/women" component={Women} />
+          </Switch>
+        </div>
+      </main>
     </Router>
   );
 }
